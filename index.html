@@ -49,7 +49,7 @@
 <body class="bg-surface text-primary font-sans antialiased selection:bg-surface-high selection:text-primary overflow-x-hidden">
 
     <!-- HERO / COVER SPREAD -->
-    <section class="bg-primary-bg min-h-screen relative flex flex-col justify-center py-20">
+    <section class="bg-primary-bg min-h-screen relative flex flex-col justify-center py-20" data-hero-section>
 
         <!-- Editorial Folio (Replaces standard Navbar) -->
         <header class="absolute top-0 left-0 w-full px-8 py-10 flex justify-between items-start z-50 mix-blend-multiply opacity-70">
@@ -67,12 +67,12 @@
 
             <!-- Left: Editorial Typography -->
             <div class="w-full lg:w-5/12 pt-10 lg:pt-32 relative z-20 mix-blend-multiply">
-                <h1 class="font-serif text-6xl md:text-8xl lg:text-[7.5rem] leading-[0.9] tracking-tighter text-primary">
+                <h1 class="font-serif text-6xl md:text-8xl lg:text-[7.5rem] leading-[0.9] tracking-tighter text-primary" data-hero-heading>
                     Stillness<br>
                     <span class="italic font-light opacity-90">&amp;</span> Space.
                 </h1>
 
-                <div class="hero-intro-block mt-12 md:mt-20">
+                <div class="hero-intro-block mt-12 md:mt-20" data-hero-intro>
                     <p class="hero-intro-text mb-8">
                         dumela, i'm anson. <br>
                         i am delighted to find you here.
@@ -80,9 +80,9 @@
                     </p>
 
                     <!-- Tertiary "Print" Link (Replaces solid button) -->
-                    <a href="#about" class="inline-flex items-center gap-4 font-serif text-2xl italic text-primary group">
-                        <span class="border-b border-primary/30 pb-1 group-hover:border-primary transition-colors">Enter the gallery</span>
-                        <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                    <a href="#about" class="hero-entry-link inline-flex items-center gap-4 font-serif text-2xl italic text-primary group" data-gallery-link>
+                        <span class="hero-entry-link__label border-b border-primary/30 pb-1 group-hover:border-primary transition-colors">Enter the gallery</span>
+                        <svg class="hero-entry-link__arrow w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                     </a>
@@ -194,6 +194,8 @@
             </div>
         </div>
     </footer>
+
+    <div class="film-noise" aria-hidden="true"></div>
 
     <div class="art-cursor" data-art-cursor aria-hidden="true">
         <div class="art-cursor__halo"></div>

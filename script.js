@@ -8,6 +8,12 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const usesCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 const canUseDynamicPointer = !prefersReducedMotion && !usesCoarsePointer;
 
+const easeInOutCubic = (value) => (
+    value < 0.5
+        ? 4 * value * value * value
+        : 1 - Math.pow((-2 * value) + 2, 3) / 2
+);
+
 class InteractiveHalftone {
     constructor(frame, canvas, image) {
         this.frame = frame;
@@ -244,10 +250,10 @@ class InteractiveBlobScene {
         const minSide = Math.min(rect.width, rect.height);
 
         const configs = [
-            { x: 0.58, y: 0.52, w: 0.82, h: 0.76, driftX: 12, driftY: 10, pull: 54, scale: 0.18, phase: 0.8 }
+            { x: 0.58, y: 0.52, w: 0.82, h: 0.76, driftX: 12, driftY: 10, pull: 88, scale: 0.24, phase: 0.8 }
         ];
 
-        this.pointerReach = Math.max(320, minSide * 0.72);
+        this.pointerReach = Math.max(380, minSide * 0.86);
         this.blobStates = this.blobs.map((blob, index) => {
             const config = configs[index] || configs[configs.length - 1];
             const width = minSide * config.w;
@@ -285,8 +291,8 @@ class InteractiveBlobScene {
         const now = time * 0.001;
 
         if (this.pointerActive) {
-            this.smoothedPointerX += (this.pointerX - this.smoothedPointerX) * 0.18;
-            this.smoothedPointerY += (this.pointerY - this.smoothedPointerY) * 0.18;
+            this.smoothedPointerX += (this.pointerX - this.smoothedPointerX) * 0.24;
+            this.smoothedPointerY += (this.pointerY - this.smoothedPointerY) * 0.24;
         }
 
         this.blobStates.forEach((blob) => {
@@ -306,22 +312,23 @@ class InteractiveBlobScene {
                 const dy = localPointerY - targetY;
                 const distance = Math.hypot(dx, dy);
                 const force = Math.max(0, 1 - (distance / this.pointerReach));
+                const pullForce = Math.pow(force, 0.85);
 
                 if (force > 0) {
                     const angle = Math.atan2(dy, dx);
-                    targetX += Math.cos(angle) * blob.pull * force;
-                    targetY += Math.sin(angle) * blob.pull * force;
-                    targetScaleX += force * blob.scaleAmount;
-                    targetScaleY -= force * (blob.scaleAmount * 0.38);
-                    targetRotate += Math.sin(angle) * force * 10;
+                    targetX += Math.cos(angle) * blob.pull * pullForce;
+                    targetY += Math.sin(angle) * blob.pull * pullForce;
+                    targetScaleX += pullForce * blob.scaleAmount;
+                    targetScaleY -= pullForce * (blob.scaleAmount * 0.34);
+                    targetRotate += Math.sin(angle) * pullForce * 12;
                 }
             }
 
-            blob.currentX += (targetX - blob.currentX) * 0.065;
-            blob.currentY += (targetY - blob.currentY) * 0.065;
-            blob.currentScaleX += (targetScaleX - blob.currentScaleX) * 0.07;
-            blob.currentScaleY += (targetScaleY - blob.currentScaleY) * 0.07;
-            blob.currentRotate += (targetRotate - blob.currentRotate) * 0.07;
+            blob.currentX += (targetX - blob.currentX) * 0.085;
+            blob.currentY += (targetY - blob.currentY) * 0.085;
+            blob.currentScaleX += (targetScaleX - blob.currentScaleX) * 0.08;
+            blob.currentScaleY += (targetScaleY - blob.currentScaleY) * 0.08;
+            blob.currentRotate += (targetRotate - blob.currentRotate) * 0.08;
 
             const translateX = blob.currentX - (blob.width * 0.5);
             const translateY = blob.currentY - (blob.height * 0.5);
@@ -564,7 +571,70 @@ const initBackgroundBlob = () => {
     new AnimatedBackgroundBlob(backgroundBlob);
 };
 
+const initGalleryTransition = () => {
+    const galleryLink = document.querySelector("[data-gallery-link]");
+
+    if (!galleryLink) {
+        return;
+    }
+
+    const targetSelector = galleryLink.getAttribute("href");
+    const target = targetSelector ? document.querySelector(targetSelector) : null;
+
+    if (!target) {
+        return;
+    }
+
+    let transitionFrame = null;
+
+    galleryLink.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (transitionFrame !== null) {
+            window.cancelAnimationFrame(transitionFrame);
+            transitionFrame = null;
+        }
+
+        const destination = window.scrollY + target.getBoundingClientRect().top - 56;
+
+        if (prefersReducedMotion) {
+            window.scrollTo(0, destination);
+            window.history.pushState(null, "", targetSelector);
+            return;
+        }
+
+        const startY = window.scrollY;
+        const distance = destination - startY;
+        const duration = 1200;
+        const startTime = performance.now();
+
+        document.body.classList.add("is-gallery-transitioning");
+
+        const step = (now) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = easeInOutCubic(progress);
+
+            document.body.style.setProperty("--gallery-progress", eased.toFixed(3));
+            window.scrollTo(0, startY + (distance * eased));
+
+            if (progress < 1) {
+                transitionFrame = window.requestAnimationFrame(step);
+                return;
+            }
+
+            document.body.classList.remove("is-gallery-transitioning");
+            document.body.style.setProperty("--gallery-progress", "0");
+            window.history.pushState(null, "", targetSelector);
+            transitionFrame = null;
+        };
+
+        transitionFrame = window.requestAnimationFrame(step);
+    });
+};
+
 initArtCursor();
 initProfileHalftone();
 initPaperShape();
 initBackgroundBlob();
+initGalleryTransition();
