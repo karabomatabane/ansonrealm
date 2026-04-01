@@ -605,7 +605,7 @@ const initGalleryTransition = () => {
 
         const startY = window.scrollY;
         const distance = destination - startY;
-        const duration = 1200;
+        const duration = 760;
         const startTime = performance.now();
 
         document.body.classList.add("is-gallery-transitioning");
