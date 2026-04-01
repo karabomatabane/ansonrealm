@@ -167,30 +167,30 @@ body {
 }
 
 body.is-gallery-transitioning [data-hero-heading] {
-    opacity: calc(1 - (var(--gallery-progress) * 0.38));
-    filter: blur(calc(var(--gallery-progress) * 6px));
-    transform: translate3d(0, calc(var(--gallery-progress) * -1.75rem), 0);
+    opacity: calc(1 - (var(--gallery-progress) * 0.38)) !important;
+    filter: blur(calc(var(--gallery-progress) * 6px)) !important;
+    transform: translate3d(0, calc(var(--gallery-progress) * -1.75rem), 0) !important;
 }
 
 body.is-gallery-transitioning [data-hero-intro] {
-    opacity: calc(1 - (var(--gallery-progress) * 0.46));
-    filter: blur(calc(var(--gallery-progress) * 8px));
-    transform: translate3d(0, calc(var(--gallery-progress) * -1.15rem), 0);
+    opacity: calc(1 - (var(--gallery-progress) * 0.46)) !important;
+    filter: blur(calc(var(--gallery-progress) * 8px)) !important;
+    transform: translate3d(0, calc(var(--gallery-progress) * -1.15rem), 0) !important;
 }
 
 body.is-gallery-transitioning .hero-entry-link {
-    transform: translate3d(0, calc(var(--gallery-progress) * 0.4rem), 0);
-    opacity: calc(1 - (var(--gallery-progress) * 0.45));
+    transform: translate3d(0, calc(var(--gallery-progress) * 0.4rem), 0) !important;
+    opacity: calc(1 - (var(--gallery-progress) * 0.45)) !important;
 }
 
 body.is-gallery-transitioning .hero-entry-link__label {
-    letter-spacing: calc(var(--gallery-progress) * 0.12em);
-    transform: translate3d(0, calc(var(--gallery-progress) * 0.15rem), 0);
+    letter-spacing: calc(var(--gallery-progress) * 0.12em) !important;
+    transform: translate3d(0, calc(var(--gallery-progress) * 0.15rem), 0) !important;
 }
 
 body.is-gallery-transitioning .hero-entry-link__arrow {
-    opacity: calc(1 - (var(--gallery-progress) * 0.7));
-    transform: translate3d(calc(var(--gallery-progress) * 0.8rem), 0, 0);
+    opacity: calc(1 - (var(--gallery-progress) * 0.7)) !important;
+    transform: translate3d(calc(var(--gallery-progress) * 0.8rem), 0, 0) !important;
 }
 
 @media (min-width: 768px) {

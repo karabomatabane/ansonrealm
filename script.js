@@ -7,6 +7,7 @@ if (yearNode) {
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const usesCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
 const canUseDynamicPointer = !prefersReducedMotion && !usesCoarsePointer;
+let isGalleryTransitioning = false;
 
 const easeInOutCubic = (value) => (
     value < 0.5
@@ -289,6 +290,11 @@ class InteractiveBlobScene {
     }
 
     animate(time) {
+        if (isGalleryTransitioning) {
+            window.requestAnimationFrame(this.animate);
+            return;
+        }
+
         const rect = this.container.getBoundingClientRect();
         const now = time * 0.001;
 
@@ -394,6 +400,11 @@ class AnimatedBackgroundBlob {
     }
 
     animate(time) {
+        if (isGalleryTransitioning) {
+            window.requestAnimationFrame(this.animate);
+            return;
+        }
+
         const rect = this.element.getBoundingClientRect();
         const now = time * 0.001;
 
@@ -596,6 +607,8 @@ const initGalleryTransition = () => {
         if (transitionFrame !== null) {
             window.cancelAnimationFrame(transitionFrame);
             transitionFrame = null;
+            document.body.classList.remove("is-gallery-transitioning");
+            document.body.style.setProperty("--gallery-progress", "0");
         }
 
         if (typeof restoreScrollBehavior === "function") {
@@ -613,14 +626,16 @@ const initGalleryTransition = () => {
 
         const startY = window.scrollY;
         const distance = destination - startY;
-        const duration = 720;
+        const duration = 1200;
         const startTime = performance.now();
         const root = document.documentElement;
         const previousScrollBehavior = root.style.scrollBehavior;
 
         root.style.scrollBehavior = "auto";
+        isGalleryTransitioning = true;
         restoreScrollBehavior = () => {
             root.style.scrollBehavior = previousScrollBehavior;
+            isGalleryTransitioning = false;
         };
 
         document.body.classList.add("is-gallery-transitioning");
