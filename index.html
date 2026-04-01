@@ -49,7 +49,7 @@
 <body class="bg-surface text-primary font-sans antialiased selection:bg-surface-high selection:text-primary overflow-x-hidden">
 
     <!-- HERO / COVER SPREAD -->
-    <section class="mouse-scene bg-primary-bg min-h-screen relative flex flex-col justify-center py-20" data-mouse-scene>
+    <section class="bg-primary-bg min-h-screen relative flex flex-col justify-center py-20">
 
         <!-- Editorial Folio (Replaces standard Navbar) -->
         <header class="absolute top-0 left-0 w-full px-8 py-10 flex justify-between items-start z-50 mix-blend-multiply opacity-70">
@@ -60,21 +60,19 @@
             </div>
         </header>
 
-        <!-- Background Ink / Paper Overlaps -->
-        <svg class="absolute top-0 right-0 w-[80vw] h-[80vh] pointer-events-none opacity-20 z-0 text-surface" viewBox="0 0 1000 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 1000 0 L 1000 1000 C 600 800, 300 900, 0 500 C 200 200, 600 100, 1000 0 Z" />
-        </svg>
+        <!-- Background Paper Shape -->
+        <div class="background-paper-blob absolute -top-[0.5vh] -right-[2vw] w-[58vw] h-[60vh] pointer-events-none opacity-20 z-0 bg-surface" data-background-blob aria-hidden="true"></div>
 
         <div class="max-w-[90rem] mx-auto w-full px-6 md:px-16 lg:px-24 z-10 flex flex-col lg:flex-row items-center lg:items-start relative">
 
             <!-- Left: Editorial Typography -->
             <div class="w-full lg:w-5/12 pt-10 lg:pt-32 relative z-20 mix-blend-multiply">
-                <h1 class="font-serif text-6xl md:text-8xl lg:text-[7.5rem] leading-[0.9] tracking-tighter text-primary" data-mouse-layer="10">
+                <h1 class="font-serif text-6xl md:text-8xl lg:text-[7.5rem] leading-[0.9] tracking-tighter text-primary">
                     Stillness<br>
                     <span class="italic font-light opacity-90">&amp;</span> Space.
                 </h1>
 
-                <div class="hero-intro-block mt-12 md:mt-20" data-mouse-layer="18">
+                <div class="hero-intro-block mt-12 md:mt-20">
                     <p class="hero-intro-text mb-8">
                         dumela, i'm anson. <br>
                         i am delighted to find you here.
@@ -95,18 +93,31 @@
             <div class="w-full lg:w-7/12 mt-20 lg:mt-0 relative h-[60vh] lg:h-[80vh] flex justify-end items-center">
 
                 <!-- Large organic beige paper layer -->
-                <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[120%] lg:w-[90%] h-[110%] bg-surface-high rounded-blob -z-10 mix-blend-normal" data-mouse-layer="-14"></div>
-
-                <!-- Dashed trail drawn over the paper -->
-                <svg class="absolute top-1/4 left-0 w-full h-full pointer-events-none opacity-40 z-20" data-mouse-layer="24" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 0 100 Q 200 0, 400 200 T 800 150" stroke="#4b6459" stroke-width="1.5" stroke-dasharray="6 8"/>
-                </svg>
+                <div class="interactive-paper-shape absolute right-0 top-1/2 -translate-y-1/2 w-[120%] lg:w-[90%] h-[110%] -z-10 mix-blend-normal" data-paper-shape aria-hidden="true">
+                    <svg class="interactive-paper-filter" width="0" height="0" focusable="false" aria-hidden="true">
+                        <defs>
+                            <filter id="hero-paper-goo">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+                                <feColorMatrix
+                                    in="blur"
+                                    mode="matrix"
+                                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10"
+                                    result="goo"
+                                />
+                                <feBlend in="SourceGraphic" in2="goo" />
+                            </filter>
+                        </defs>
+                    </svg>
+                    <div class="interactive-paper-goo">
+                        <span class="interactive-paper-blob" data-paper-blob></span>
+                    </div>
+                </div>
 
                 <!-- Small aesthetic marker -->
-                <div class="absolute bottom-10 left-10 lg:left-0 z-30 flex items-center gap-3" data-mouse-layer="12">
+                <!-- <div class="absolute bottom-10 left-10 lg:left-0 z-30 flex items-center gap-3">
                     <div class="w-12 h-px bg-primary opacity-50"></div>
                     <span class="text-xs uppercase tracking-[0.2em] text-primary">Fig. 1</span>
-                </div>
+                </div>   -->
             </div>
         </div>
     </section>
@@ -141,10 +152,11 @@
                     <p class="text-xs font-semibold uppercase tracking-widest text-secondary mb-8 border-b border-outline-variant pb-4 inline-block">
                         artist &bull; curator
                     </p>
-                    <figure class="about-profile-frame w-full h-48 rounded-leaf hidden md:block mt-8" data-image-tilt>
+                    <figure class="about-profile-frame w-full h-72 rounded-leaf hidden md:block mt-8" data-halftone-frame>
+                        <canvas class="about-profile-canvas" data-halftone-canvas aria-hidden="true"></canvas>
                         <img
                             class="about-profile-image"
-                            src="assets/images/profile.jpg"
+                            src="assets/images/profile3.jpg"
                             alt="profile picture of anson"
                             width="200"
                             height="200"
@@ -184,24 +196,8 @@
     </footer>
 
     <div class="art-cursor" data-art-cursor aria-hidden="true">
-        <svg class="art-cursor__filter" width="0" height="0" focusable="false" aria-hidden="true">
-            <defs>
-                <filter id="art-cursor-goo">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
-                    <feColorMatrix
-                        in="blur"
-                        mode="matrix"
-                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-                        result="goo"
-                    />
-                    <feBlend in="SourceGraphic" in2="goo" />
-                </filter>
-            </defs>
-        </svg>
-        <div class="art-cursor__goo">
-            <div class="art-cursor__blob art-cursor__blob--trail"></div>
-            <div class="art-cursor__blob art-cursor__blob--core"></div>
-        </div>
+        <div class="art-cursor__halo"></div>
+        <div class="art-cursor__dot"></div>
     </div>
 
     <script src="script.js"></script>
