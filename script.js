@@ -14,6 +14,8 @@ const easeInOutCubic = (value) => (
         : 1 - Math.pow((-2 * value) + 2, 3) / 2
 );
 
+const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
+
 class InteractiveHalftone {
     constructor(frame, canvas, image) {
         this.frame = frame;
@@ -605,7 +607,7 @@ const initGalleryTransition = () => {
 
         const startY = window.scrollY;
         const distance = destination - startY;
-        const duration = 760;
+        const duration = 720;
         const startTime = performance.now();
 
         document.body.classList.add("is-gallery-transitioning");
@@ -613,7 +615,7 @@ const initGalleryTransition = () => {
         const step = (now) => {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            const eased = easeInOutCubic(progress);
+            const eased = easeOutCubic(progress);
 
             document.body.style.setProperty("--gallery-progress", eased.toFixed(3));
             window.scrollTo(0, startY + (distance * eased));
@@ -629,7 +631,7 @@ const initGalleryTransition = () => {
             transitionFrame = null;
         };
 
-        transitionFrame = window.requestAnimationFrame(step);
+        step(startTime);
     });
 };
 
