@@ -588,6 +588,7 @@ const initGalleryTransition = () => {
     }
 
     let transitionFrame = null;
+    let restoreScrollBehavior = null;
 
     galleryLink.addEventListener("click", (event) => {
         event.preventDefault();
@@ -595,6 +596,11 @@ const initGalleryTransition = () => {
         if (transitionFrame !== null) {
             window.cancelAnimationFrame(transitionFrame);
             transitionFrame = null;
+        }
+
+        if (typeof restoreScrollBehavior === "function") {
+            restoreScrollBehavior();
+            restoreScrollBehavior = null;
         }
 
         const destination = window.scrollY + target.getBoundingClientRect().top - 56;
@@ -609,6 +615,13 @@ const initGalleryTransition = () => {
         const distance = destination - startY;
         const duration = 720;
         const startTime = performance.now();
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+
+        root.style.scrollBehavior = "auto";
+        restoreScrollBehavior = () => {
+            root.style.scrollBehavior = previousScrollBehavior;
+        };
 
         document.body.classList.add("is-gallery-transitioning");
 
@@ -627,6 +640,8 @@ const initGalleryTransition = () => {
 
             document.body.classList.remove("is-gallery-transitioning");
             document.body.style.setProperty("--gallery-progress", "0");
+            restoreScrollBehavior?.();
+            restoreScrollBehavior = null;
             window.history.pushState(null, "", targetSelector);
             transitionFrame = null;
         };
