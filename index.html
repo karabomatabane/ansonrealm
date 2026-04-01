@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ansonrealm | Digital Living Room</title>
+
+    <!-- Google Fonts: Newsreader (Serif) & Work Sans (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration based on Editorial Serenity & Image References -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4b6459',
+                        'primary-bg': '#9cb0a5',
+                        secondary: '#645f4d',
+                        tertiary: '#6c5d3f',
+                        surface: '#fff8ef',
+                        'surface-low': '#ffffff',
+                        'surface-high': '#f0e2b6',
+                        'on-surface': '#3a3214',
+                        'on-surface-variant': '#645f4d',
+                        'outline-variant': '#beb189',
+                        'primary-dim': 'rgba(75, 100, 89, 0.15)'
+                    },
+                    fontFamily: {
+                        serif: ['Newsreader', 'serif'],
+                        sans: ['Work Sans', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'leaf': '4rem 0.5rem 4rem 0.5rem',
+                        'pebble': '3rem 4rem 2rem 5rem',
+                        'blob': '50% 50% 50% 50% / 60% 40% 60% 40%'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-surface text-primary font-sans antialiased selection:bg-surface-high selection:text-primary overflow-x-hidden">
+
+    <!-- HERO / COVER SPREAD -->
+    <section class="mouse-scene bg-primary-bg min-h-screen relative flex flex-col justify-center py-20" data-mouse-scene>
+
+        <!-- Editorial Folio (Replaces standard Navbar) -->
+        <header class="absolute top-0 left-0 w-full px-8 py-10 flex justify-between items-start z-50 mix-blend-multiply opacity-70">
+            <div class="font-serif text-xl md:text-2xl tracking-widest text-primary italic">ansonrealm.</div>
+            <div class="flex flex-col items-end text-[10px] md:text-xs tracking-[0.2em] font-semibold uppercase text-secondary">
+                <span>Folio &mdash; 01</span>
+                <span class="mt-1">Digital Living Room</span>
+            </div>
+        </header>
+
+        <!-- Background Ink / Paper Overlaps -->
+        <svg class="absolute top-0 right-0 w-[80vw] h-[80vh] pointer-events-none opacity-20 z-0 text-surface" viewBox="0 0 1000 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 1000 0 L 1000 1000 C 600 800, 300 900, 0 500 C 200 200, 600 100, 1000 0 Z" />
+        </svg>
+
+        <div class="max-w-[90rem] mx-auto w-full px-6 md:px-16 lg:px-24 z-10 flex flex-col lg:flex-row items-center lg:items-start relative">
+
+            <!-- Left: Editorial Typography -->
+            <div class="w-full lg:w-5/12 pt-10 lg:pt-32 relative z-20 mix-blend-multiply">
+                <h1 class="font-serif text-6xl md:text-8xl lg:text-[7.5rem] leading-[0.9] tracking-tighter text-primary" data-mouse-layer="10">
+                    Stillness<br>
+                    <span class="italic font-light opacity-90">&amp;</span> Space.
+                </h1>
+
+                <div class="hero-intro-block mt-12 md:mt-20" data-mouse-layer="18">
+                    <p class="hero-intro-text mb-8">
+                        dumela, i'm anson. <br>
+                        i am delighted to find you here.
+                        i am an artist and i have curated this space (realm) to share my artistic inklings with you.
+                    </p>
+
+                    <!-- Tertiary "Print" Link (Replaces solid button) -->
+                    <a href="#about" class="inline-flex items-center gap-4 font-serif text-2xl italic text-primary group">
+                        <span class="border-b border-primary/30 pb-1 group-hover:border-primary transition-colors">Enter the gallery</span>
+                        <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Collage / Image (Breaks the grid) -->
+            <div class="w-full lg:w-7/12 mt-20 lg:mt-0 relative h-[60vh] lg:h-[80vh] flex justify-end items-center">
+
+                <!-- Large organic beige paper layer -->
+                <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[120%] lg:w-[90%] h-[110%] bg-surface-high rounded-blob -z-10 mix-blend-normal" data-mouse-layer="-14"></div>
+
+                <!-- Dashed trail drawn over the paper -->
+                <svg class="absolute top-1/4 left-0 w-full h-full pointer-events-none opacity-40 z-20" data-mouse-layer="24" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 0 100 Q 200 0, 400 200 T 800 150" stroke="#4b6459" stroke-width="1.5" stroke-dasharray="6 8"/>
+                </svg>
+
+                <!-- Small aesthetic marker -->
+                <div class="absolute bottom-10 left-10 lg:left-0 z-30 flex items-center gap-3" data-mouse-layer="12">
+                    <div class="w-12 h-px bg-primary opacity-50"></div>
+                    <span class="text-xs uppercase tracking-[0.2em] text-primary">Fig. 1</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTICLE / ABOUT SPREAD -->
+    <section id="about" class="bg-surface text-primary py-32 px-6 md:px-16 lg:px-24 relative overflow-hidden">
+
+        <div class="max-w-[80rem] mx-auto relative z-10">
+
+            <!-- Curated Quote - Magazine Pull Quote Style -->
+            <div class="w-full max-w-4xl mx-auto text-center mb-32 relative">
+                <!-- Decorative organic marks -->
+                <svg class="absolute -top-16 left-1/2 -translate-x-1/2 w-16 h-16 text-outline-variant opacity-40" viewBox="0 0 24 24" fill="currentColor">
+                     <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4"/>
+                     <circle cx="12" cy="12" r="4" />
+                </svg>
+
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-primary italic font-light leading-snug">
+                    "Beautiful works are taking shape and will reside here soon."
+                </h2>
+                <div class="mt-8 text-sm uppercase tracking-[0.2em] text-secondary">
+                    &mdash; The Collection
+                </div>
+            </div>
+
+            <!-- Two-column text layout mimicking an editorial article -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+                <!-- Subheading / Title -->
+                <div class="md:col-span-5 lg:col-span-4">
+                    <h3 class="font-serif text-3xl md:text-4xl text-primary mb-6">about anson</h3>
+                    <p class="text-xs font-semibold uppercase tracking-widest text-secondary mb-8 border-b border-outline-variant pb-4 inline-block">
+                        artist &bull; curator
+                    </p>
+                    <figure class="about-profile-frame w-full h-48 rounded-leaf hidden md:block mt-8" data-image-tilt>
+                        <img
+                            class="about-profile-image"
+                            src="assets/images/profile.jpg"
+                            alt="profile picture of anson"
+                            width="200"
+                            height="200"
+                        >
+                    </figure>
+                </div>
+
+                <!-- Flowing Body Text -->
+                <div class="md:col-span-7 lg:col-span-8 columns-1 lg:columns-2 gap-12 text-on-surface-variant text-lg leading-loose font-light">
+                    <p class="mb-6 break-inside-avoid">
+                        a keen observer of the world, with a deep love for hyperrealism, surrealism, minimalism, and messy creative expression.
+                    </p>
+                    <p class="mb-6 break-inside-avoid">
+                        having decided to step away from traditional platforms due to a desire for intentionality, i wanted to build a space where one could simply sit, look, and breathe.
+                    </p>
+                    <p class="break-inside-avoid">
+                        please check back as i arrange the room and hang the pieces on the walls. the gallery is currently being curated.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- COLOPHON / FOOTER -->
+    <footer class="bg-surface pb-12 pt-24 px-6 md:px-16 border-t border-primary/10">
+        <div class="max-w-[80rem] mx-auto flex flex-col items-center justify-center text-center opacity-70">
+            <svg class="w-8 h-8 text-primary mb-6 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M12 2L15 8L22 9L17 14L18 21L12 17L6 21L7 14L2 9L9 8L12 2Z" stroke-linejoin="round"/>
+            </svg>
+            <div class="font-serif text-2xl mb-4 italic">ansonrealm</div>
+            <div class="text-xs font-light tracking-[0.2em] uppercase text-secondary">
+                keep the windows open, thank you.<br><br>
+                &copy; <span id="year"></span> karabo matabane.
+            </div>
+        </div>
+    </footer>
+
+    <div class="art-cursor" data-art-cursor aria-hidden="true">
+        <svg class="art-cursor__filter" width="0" height="0" focusable="false" aria-hidden="true">
+            <defs>
+                <filter id="art-cursor-goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                    <feColorMatrix
+                        in="blur"
+                        mode="matrix"
+                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                        result="goo"
+                    />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="art-cursor__goo">
+            <div class="art-cursor__blob art-cursor__blob--trail"></div>
+            <div class="art-cursor__blob art-cursor__blob--core"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
